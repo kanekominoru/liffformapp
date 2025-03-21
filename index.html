@@ -78,7 +78,7 @@
             }).then(() => {
                 liff.getProfile();
             }).then((profile) => {
-                userId = profile.userId;
+                userId = profile;
                 initializeApp();
             }).catch((err) => {
                 console.log('LIFF Initialization failed ', err);
