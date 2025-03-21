@@ -67,56 +67,74 @@
 
         $("#datepicker").datepicker();
 
-        $(document).ready(function () {
-            const liffId = "2007083053-l1KX8Q7N";
-            initializeLiff(liffId);
-        })
+        // $(document).ready(function () {
+        //     const liffId = "2007083053-l1KX8Q7N";
+        //     initializeLiff(liffId);
+        // })
 
-        function initializeLiff(liffId) {
-            liff.init({
-                liffId: liffId
-            }).then(() => {
-                userId = liff.getDecodedIDToken().sub;
-                initializeApp();
-            }).catch((err) => {
-                console.log('LIFF Initialization failed ', err);
-            });
-        }
+        // function initializeLiff(liffId) {
+        //     liff.init({
+        //         liffId: liffId
+        //     }).then(() => {
+        //         userId = liff.getDecodedIDToken().sub;
+        //         initializeApp();
+        //     }).catch((err) => {
+        //         console.log('LIFF Initialization failed ', err);
+        //     });
+        // }
 
-        function sendText(text) {
-            liff.sendMessages([{
-                'type': 'text',
-                'text': text
-            }]).then(function () {
-                liff.closeWindow();
-            }).catch(function (error) {
-                window.alert('Failed to send message ' + error);
-            });
-        }
+        // function sendText(text) {
+        //     liff.sendMessages([{
+        //         'type': 'text',
+        //         'text': text
+        //     }]).then(function () {
+        //         liff.closeWindow();
+        //     }).catch(function (error) {
+        //         window.alert('Failed to send message ' + error);
+        //     });
+        // }
         
-        const params = (new URL(document.location)).searchParams;
-        const key = params.get('key');
+        // const params = (new URL(document.location)).searchParams;
+        // const key = params.get('key');
 
-        $(function () {
-            $('form').submit(function () {
-                const name    = $('input[name="name"]').val();
-                const kana = $('input[name="kana"]').val();
-                const kanyu  = $('input[name="kanyu"]').val();
-                const kyoten  = $('input[name="kyoten"]').val();
-                const birthdate = $('input[name="birthdate"]').val();
-                const telephone = $('input[name="telephone"]').val();
-
-
+        // $(function () {
+        //     $('form').submit(function () {
+        //         const name    = $('input[name="name"]').val();
+        //         const kana = $('input[name="kana"]').val();
+        //         const kanyu  = $('input[name="kanyu"]').val();
+        //         const kyoten  = $('input[name="kyoten"]').val();
+        //         const birthdate = $('input[name="birthdate"]').val();
+        //         const telephone = $('input[name="telephone"]').val();
 
 
-                const msg = `【userId】:${userId}\n【氏名】:${name}\n【カナ】:${kana}\n【保険加入状況】:${kanyu}\n【所属拠点】:${kyoten}\n【生年月日】:${birthdate}\n【電話番号】:${telephone}`;
-                sendText(msg);
-                return false;
-            });
+
+
+        //         const msg = `【userId】:${userId}\n【氏名】:${name}\n【カナ】:${kana}\n【保険加入状況】:${kanyu}\n【所属拠点】:${kyoten}\n【生年月日】:${birthdate}\n【電話番号】:${telephone}`;
+        //         sendText(msg);
+        //         return false;
+        //     });
+        // });
+
+
+        liff.init({liffId: '2007083053-l1KX8Q7N'})
+          .catch((err) => {
+            console.log(err);
         });
 
+        liff.ready.then(() => {
+            if (!liff.isLoggedIn()) {
+                liff.login();
+            }
+            const idToken = liff.getDecodedIDToken();
+            userId = idToken.sub;
+            $('form').append(`<input type="hidden" name="userId" value="${userId}">`);
 
-        
+        })
+
+        $('form').submit(function( event ) {
+            event.preventDefault();
+            $.post( 'https://script.google.com/macros/s/AKfycbyLJibLUxEfNuwgN69IoFUGI5eEdr9Ne-QfyBihyUChf2nHV9drBFWswyTLl-obWDtCGA/exec', $('form').serialize() );
+        });
 
     </script>
 
