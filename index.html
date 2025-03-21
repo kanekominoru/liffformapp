@@ -50,10 +50,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
-    <script src="https://js.cybozu.com/kintone-rest-api-client/5.7.1/KintoneRestAPIClient.min.js"></script>
     <script>
-        const client = new KintoneRestAPIClient();
-        console.log(client);
         let userId = "";
         const btnSubmit = document.querySelector(".btn");
         const chkConfirm = document.querySelector("#check1a");
@@ -129,13 +126,33 @@
             userId = idToken.sub;
             $('form').append(`<input type="hidden" name="userId" value="${userId}">`);
 
-        })
+        });
 
         $('form').submit(function( event ) {
             event.preventDefault();
             $.post( 'https://script.google.com/macros/s/AKfycbyLJibLUxEfNuwgN69IoFUGI5eEdr9Ne-QfyBihyUChf2nHV9drBFWswyTLl-obWDtCGA/exec', $('form').serialize() );
+
+            const name    = $('input[name="name"]').val();
+            const kana = $('input[name="kana"]').val();
+            const kanyu  = $('input[name="kanyu"]').val();
+            const kyoten  = $('input[name="kyoten"]').val();
+            const birthdate = $('input[name="birthdate"]').val();
+            const telephone = $('input[name="telephone"]').val();
+            const msg = `ご回答ありがとうございます。\n【userId】:${userId}\n【氏名】:${name}\n【カナ】:${kana}\n【保険加入状況】:${kanyu}\n【所属拠点】:${kyoten}\n【生年月日】:${birthdate}\n【電話番号】:${telephone}`;
+            sendText(msg);
+            return false;
         });
 
+        function sendText(text) {
+            liff.sendMessages([{
+                'type': 'text',
+                'text': text
+            }]).then(function () {
+                liff.closeWindow();
+            }).catch(function (error) {
+                window.alert('Failed to send message ' + error);
+            });
+        }
     </script>
 
 </body>
