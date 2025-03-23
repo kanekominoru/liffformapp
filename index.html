@@ -137,7 +137,6 @@
             const birthdate = $('input[name="birthdate"]').val();
             const telephone = $('input[name="telephone"]').val();
             const msg = `ご回答ありがとうございます。\n【氏名】:${name}\n【カナ】:${kana}\n【保険加入状況】:${kanyu}\n【所属拠点】:${kyoten}\n【生年月日】:${birthdate}\n【電話番号】:${telephone}`;
-            sendText(msg);
 
             function sendText(text) {
                 liff.sendMessages([{
