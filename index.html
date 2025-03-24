@@ -131,6 +131,7 @@
 
             $('form').submit(function( event ) {
                 const msg = "ご回答いただきありがとうございます。\n・お見積り依頼\n・変更、問い合わせ\nなどはメッセージか下部のメニューから連絡ください！\n内容に応じて、担当者からご返信させて頂きます😀\n※チャット受付時間：平日8：30～17：30" ;
+                sendText(msg);
                 event.preventDefault();
                 $.post(url, $('form').serialize() );
             });
