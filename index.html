@@ -48,7 +48,7 @@
             </div>
             <p class="mt-3">生年月日</p>
             <div>
-                <input type="text" id="datepicker" placeholder="生年月日を選択してください" class="form-control w-100 mt-1" name="birthdate" required>
+                <input type="text" id="datepicker" placeholder="生年月日を選択してください" class="form-control js-super-picker w-100 mt-1" name="birthdate" required>
             </div>
             <p class="mt-3">電話番号</p>
             <div>
@@ -78,6 +78,7 @@
             const chkConfirm = document.querySelector("#check1a");
             const datepicker = document.getElementById('datepicker');
             const picker = new Picker(datepicker, {
+                container: '.js-super-picker-container',
                 format: 'YYYY/MM/DD',
                 text: {
                     title: '生年月日をお選びください。',
