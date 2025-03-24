@@ -1,158 +1,120 @@
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>基本情報</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-</head>
-<body>
-
-    <form class="w-75 mx-auto">
-        <p class="mt-3">氏名(漢字)</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="name" placeholder="" required>
-        </div>
-        <p class="mt-3">氏名(カナ)</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="kana" required>
-        </div>
-        <p class="mt-3">サンヴァーテックスでの保険加入状況</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="kanyu" required>
-        </div>
-        <p class="mt-3">所属拠点</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="kyoten" required>
-        </div>
-        <p class="mt-3">生年月日</p>
-        <div>
-            <input type="text" id="datepicker" placeholder="生年月日を選択してください" class="form-control w-100 mt-1" name="birthdate" required>
-        </div>
-        <p class="mt-3">電話番号</p>
-        <div>
-            <input class="form-control w-100 mt-1" name="telephone" required>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="check1a">
-            <label class="form-check-label" for="check1a">個人情報の取り扱いを承諾する</label>
-          </div>
-        <input type="submit" class="mt-4 btn btn-primary" value="送信" disabled>
-    </form>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="https://rawgit.com/jquery/jquery-ui/master/ui/i18n/datepicker-ja.js"></script>
-    <script src="https://js.cybozu.com/kintone-rest-api-client/5.7.1/KintoneRestAPIClient.min.js"></script>
-    <script>
-        let userId = "";
-        const btnSubmit = document.querySelector(".btn");
-        const chkConfirm = document.querySelector("#check1a");
-        chkConfirm.addEventListener('change', (e)=>{
-            if (btnSubmit.disabled){
-                btnSubmit.disabled = false;
-            } else {
-                btnSubmit.disabled = true;
-            }
-        });
-
-        $("#datepicker").datepicker();
-
-        // $(document).ready(function () {
-        //     const liffId = "2007083053-l1KX8Q7N";
-        //     initializeLiff(liffId);
-        // })
-
-        // function initializeLiff(liffId) {
-        //     liff.init({
-        //         liffId: liffId
-        //     }).then(() => {
-        //         userId = liff.getDecodedIDToken().sub;
-        //         initializeApp();
-        //     }).catch((err) => {
-        //         console.log('LIFF Initialization failed ', err);
-        //     });
-        // }
-
-        // function sendText(text) {
-        //     liff.sendMessages([{
-        //         'type': 'text',
-        //         'text': text
-        //     }]).then(function () {
-        //         liff.closeWindow();
-        //     }).catch(function (error) {
-        //         window.alert('Failed to send message ' + error);
-        //     });
-        // }
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>基本情報</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <form class="w-75 mx-auto">
+            <p class="mt-3">氏名(漢字)</p>
+            <div>
+                <input class="form-control w-100 mt-1" name="name" placeholder="" required>
+            </div>
+            <p class="mt-3">氏名(カナ)</p>
+            <div>
+                <input class="form-control w-100 mt-1" name="kana" required>
+            </div>
+            <p class="mt-3">サンヴァーテックスでの保険加入状況</p>
+            <div>
+                <input class="form-control w-100 mt-1" name="kanyu" required>
+            </div>
+            <p class="mt-3">所属拠点</p>
+            <div>
+                <select class="form-control w-100 mt-1" name="kyoten">
+                    <option value="tamamura" selected>玉村工場</option>
+                    <option value="nakanozyo">中之条工場</option>
+                    <option value="takasaki">高崎GC</option>
+                    <option value="haruna">榛名工場</option>
+                    <option value="randd">R&D</option>
+                    <option value="ippan">一般</option>
+                    <option value="ob">OB</option>
+                    <option value="fukushima">福島太陽誘電</option>
+                    <option value="nigata">新潟太陽誘電</option>
+                    <option value="wakayama">和歌山太陽誘電</option>
+                    <option value="chemical">ケミカルテクノロジー</option>
+                    <option value="mobile">モバイルテクノロジー</option>
+                    <option value="elna">エルナー</option>
+                    <option value="assist">環境アシスト</option>
+                    <option value="sunvertex">サンヴァーテックス</option>  
+                </select>
+            </div>
+            <p class="mt-3">生年月日</p>
+            <div>
+                <input type="text" id="datepicker" placeholder="生年月日を選択してください" class="form-control w-100 mt-1" name="birthdate" required>
+            </div>
+            <p class="mt-3">電話番号</p>
+            <div>
+                <input class="form-control w-100 mt-1" name="telephone" required>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check1a">
+                <label class="form-check-label" for="check1a">個人情報の取り扱いを承諾する</label>
+            </div>
+            <input type="submit" class="mt-4 btn btn-primary" value="送信" disabled>
+        </form>
         
-        // const params = (new URL(document.location)).searchParams;
-        // const key = params.get('key');
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/pickerjs@1.2.1/dist/picker.min.js"></script>
 
-        // $(function () {
-        //     $('form').submit(function () {
-        //         const name    = $('input[name="name"]').val();
-        //         const kana = $('input[name="kana"]').val();
-        //         const kanyu  = $('input[name="kanyu"]').val();
-        //         const kyoten  = $('input[name="kyoten"]').val();
-        //         const birthdate = $('input[name="birthdate"]').val();
-        //         const telephone = $('input[name="telephone"]').val();
+        <script>
+            let userId = "";
+            const liffId = '2007083053-l1KX8Q7N';
+            const url = 'https://script.google.com/macros/s/AKfycbyLJibLUxEfNuwgN69IoFUGI5eEdr9Ne-QfyBihyUChf2nHV9drBFWswyTLl-obWDtCGA/exec';
+            const btnSubmit = document.querySelector(".btn");
+            const chkConfirm = document.querySelector("#check1a");
+            const datepicker = document.getElementById('datepicker');
+            const picker = new Picker(datepicker, {
+                format: 'YYYY/MM/DD',
+            });
 
+            chkConfirm.addEventListener('change', (e)=>{
+                if (btnSubmit.disabled){
+                    btnSubmit.disabled = false;
+                } else {
+                    btnSubmit.disabled = true;
+                }
+            });
 
+            liff.init({liffId: liffId})
+            .catch((err) => {
+                console.log(err);
+            });
 
+            liff.ready.then(() => {
+                if (!liff.isLoggedIn()) {
+                    liff.login();
+                }
+                const idToken = liff.getDecodedIDToken();
+                userId = idToken.sub;
+                $('form').append(`<input type="hidden" name="userId" value="${userId}">`);
+            });
 
-        //         const msg = `【userId】:${userId}\n【氏名】:${name}\n【カナ】:${kana}\n【保険加入状況】:${kanyu}\n【所属拠点】:${kyoten}\n【生年月日】:${birthdate}\n【電話番号】:${telephone}`;
-        //         sendText(msg);
-        //         return false;
-        //     });
-        // });
-
-
-        liff.init({liffId: '2007083053-l1KX8Q7N'})
-          .catch((err) => {
-            console.log(err);
-        });
-
-        liff.ready.then(() => {
-            if (!liff.isLoggedIn()) {
-                liff.login();
-            }
-            const idToken = liff.getDecodedIDToken();
-            userId = idToken.sub;
-            $('form').append(`<input type="hidden" name="userId" value="${userId}">`);
-
-        });
-
-        $('form').submit(function( event ) {
-            const name    = $('input[name="name"]').val();
-            const kana = $('input[name="kana"]').val();
-            const kanyu  = $('input[name="kanyu"]').val();
-            const kyoten  = $('input[name="kyoten"]').val();
-            const birthdate = $('input[name="birthdate"]').val();
-            const telephone = $('input[name="telephone"]').val();
-            const msg = `ご回答ありがとうございます。\n【氏名】:${name}\n【カナ】:${kana}\n【保険加入状況】:${kanyu}\n【所属拠点】:${kyoten}\n【生年月日】:${birthdate}\n【電話番号】:${telephone}`;
-
-            function sendText(text) {
-                liff.sendMessages([{
-                    'type': 'text',
-                    'text': `${msg}`
-                }]).then(function () {
-                    liff.closeWindow();
-                }).catch(function (error) {
-                    window.alert('Failed to send message ' + error);
-                });
-            }
-            event.preventDefault();
-            $.post( 'https://script.google.com/macros/s/AKfycbyLJibLUxEfNuwgN69IoFUGI5eEdr9Ne-QfyBihyUChf2nHV9drBFWswyTLl-obWDtCGA/exec', $('form').serialize() );
-        });
-
-    </script>
-
-</body>
+            $('form').submit(function( event ) {
+                const msg = "ご回答いただきありがとうございます。\n・お見積り依頼\n・変更、問い合わせ\nなどはメッセージか下部のメニューから連絡ください！\n内容に応じて、担当者からご返信させて頂きます😀\n※チャット受付時間：平日8：30～17：30" ;
+                function sendText(text) {
+                    liff.sendMessages([{
+                        'type': 'text',
+                        'text': `${msg}`
+                    }]).then(function () {
+                        liff.closeWindow();
+                    }).catch(function (error) {
+                        window.alert('Failed to send message ' + error);
+                    });
+                }
+                event.preventDefault();
+                $.post(url, $('form').serialize() );
+            });
+        </script>
+    </body>
 </html>
