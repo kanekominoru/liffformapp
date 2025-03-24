@@ -118,19 +118,19 @@
                 $('form').append(`<input type="hidden" name="userId" value="${userId}">`);
             });
 
+            const sendText = (text) => {
+                liff.sendMessages([{
+                    'type': 'text',
+                    'text': text,
+                }]).then(function () {
+                    liff.closeWindow();
+                }).catch(function (error) {
+                    window.alert('Failed to send message ' + error);
+                });
+            }
+
             $('form').submit(function( event ) {
-                // const msg = "ご回答いただきありがとうございます。\n・お見積り依頼\n・変更、問い合わせ\nなどはメッセージか下部のメニューから連絡ください！\n内容に応じて、担当者からご返信させて頂きます😀\n※チャット受付時間：平日8：30～17：30" ;
-                const msg = "ご回答いただきありがとうございます。";
-                function sendText(text) {
-                    liff.sendMessages([{
-                        'type': 'text',
-                        'text': `${msg}`
-                    }]).then(function () {
-                        liff.closeWindow();
-                    }).catch(function (error) {
-                        window.alert('Failed to send message ' + error);
-                    });
-                }
+                const msg = "ご回答いただきありがとうございます。\n・お見積り依頼\n・変更、問い合わせ\nなどはメッセージか下部のメニューから連絡ください！\n内容に応じて、担当者からご返信させて頂きます😀\n※チャット受付時間：平日8：30～17：30" ;
                 event.preventDefault();
                 $.post(url, $('form').serialize() );
             });
